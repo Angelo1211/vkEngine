@@ -1,10 +1,8 @@
 #include <stdio.h>
 #define UNICODE
 #include <windows.h>
-#include <d3d11.h>
-#include <d3dcompiler.h>
-#include <DirectXMath.h>
-#include <DirectXColors.h>
+#include <assert.h>
+#include <vulkan/vulkan.h>
 
 /*
 PLAN:
@@ -12,10 +10,17 @@ PLAN:
 */
 
 //Globals
-LPCSTR WndClassName = "firstWindow";
+LPCSTR WndClassName = "testWindow";
 HWND hwnd = NULL;
 const int Width = 800;
 const int Height = 600;
+
+#define VK_CHECK(call) \
+   do { \
+        VkResult result_ = call; \
+        assert(result_ = VK_SUCCESS); \
+  } while(0)                 \
+
 
 bool InitializeWindow(HINSTANCE hInstance,
                       int ShowWnd,
@@ -30,6 +35,10 @@ LRESULT CALLBACK WndProc(HWND hWnd,
                          WPARAM wParam,
                          LPARAM lParam);
 
+int main(){
+  return WinMain(GetModuleHandle(NULL), 0, 0, 0);
+}
+
 int WINAPI WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLIne,
@@ -42,6 +51,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
                    L"Error", MB_OK);
         return 0;
     }
+
+    VkInstanceCreateInfo createInfo;
+
+    VkInstance instance = 0;
+    // VK_CHECK(vkCreateInstance(&createInfo, 0, &instance));
 
     messageloop();
 
@@ -92,7 +106,7 @@ bool InitializeWindow(HINSTANCE hInstance,
         return false;
     }
 
-    ShowWindow(hwnd, ShowWnd);
+    ShowWindow(hwnd, SW_SHOWDEFAULT);
     UpdateWindow(hwnd);
     return true;
 }

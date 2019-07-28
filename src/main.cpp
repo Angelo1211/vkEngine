@@ -2,8 +2,6 @@
 #define UNICODE
 #define _DEBUG 1
 #include <windows.h>
-#include <assert.h>
-#include <vulkan/vulkan.h>
 
 //Unity Build
 #include "globals.cpp"

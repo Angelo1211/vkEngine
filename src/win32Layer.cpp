@@ -1,6 +1,10 @@
+#pragma once
+
+LPCSTR g_WndClassName = "testWindow";
+HWND g_hwnd = NULL;
+
 int
-messageloop()
-{
+messageloop(){
     MSG msg;
 
     ZeroMemory(&msg, sizeof(MSG));
@@ -25,10 +29,9 @@ messageloop()
 
 LRESULT CALLBACK
 WndProc(HWND hwnd,
-                         UINT msg,
-                         WPARAM wParam,
-                         LPARAM lParam)
-{
+        UINT msg,
+        WPARAM wParam,
+        LPARAM lParam){
     switch (msg)
     {
     case WM_KEYDOWN:
@@ -106,8 +109,7 @@ int WINAPI
 WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLIne,
-                   int nShowCmd)
-{
+                   int nShowCmd){
     if (!InitializeWindow(hInstance, nShowCmd, g_Width, g_Height, true))
     {
         MessageBox(0, L"Window Init Failed",

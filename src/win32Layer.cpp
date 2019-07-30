@@ -122,9 +122,6 @@ WinMain(HINSTANCE hInstance,
                    L"Error", MB_OK);
         return 0;
     }
-
-    InitializeVulkan();
-
     messageloop();
 
     vkDestroyInstance(g_instance, 0);
